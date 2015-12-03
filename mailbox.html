@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MailBox</title>
+    <link rel = "stylesheet" href = "css/style.css"> 
+    <script src="http://code.jquery.com/jquery-2.0.3.js"></script>
+    <script>
+        var username = window.location.search.substring(1);
+        
+        function gotomailbox()
+        {
+            window.location.href="mailbox.html?"+username;
+        }
+        function getmessege()
+        {
+            var username = window.location.search.substring(1);
+            $.post("http://140.115.204.78/FinalProject/FetchUserMobile.php",
+            {
+                username: username,
+            },
+            function(data){
+                var mobile = data;
+                $.post("http://140.115.204.78/FinalProject/getmessege.php",
+                {
+                    mobile: mobile,
+                },
+                function(data){
+                    
+                    document.getElementById('gotit').style.visibility = "visible";
+                    document.getElementById('messege').innerHTML=data;
+                
+                });
+            });
+        }
+    </script>
+</head>
+<body onload="getmessege()">
+    <header id="header">
+				<h1 id="barcaption">聽說</h1>
+				<nav id="nav">
+					<ul>
+						<li><a onclick="gotomain()">想說什麼</a></li>
+						<li><a>郵箱</a></li>
+					</ul>
+				</nav>
+    </header>
+    <div class="wrapper" id="gaobaiform">
+	<div class="container">
+        <h1 id="gotit" style="visibility: hidden">有人想和你說：</h1>
+        <p id="messege">慢慢等待你生命中的那個人吧!</p>
+	</div>
+</div>
+
+
+
+</body>
+</html>

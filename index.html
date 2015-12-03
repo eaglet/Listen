@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>聽說</title>
+    <link rel = "stylesheet" href = "css/style.css"> 
+     <script src="http://code.jquery.com/jquery-2.0.3.js"></script>
+    <script>
+    $(document).ready(function(){
+        var $form = $('form');
+        $form.submit(function(){
+        $.post($(this).attr('action'), $(this).serialize(), function(response){
+            if(response == true){
+                var username = document.getElementById('username').value;
+                window.location.href="main.html?" + username;
+            }else{
+                document.getElementById('showerror').innerHTML="invalid username or password";
+            }
+        },'json');
+        return false;
+        });
+            });
+        
+
+    </script>
+</head>
+<body>
+    <div id="caption">
+    <h2>想和他說一件事，卻沒有告訴他的勇氣...</h2>
+        <br>
+    <h1>聽說</h1>
+    </div>
+<div class="wrapper">
+	<div class="container">
+		<form class="form" method="post" action="http://140.115.204.78/FinalProject/FetchUserData.php">
+			<input type="text" placeholder="Username" name ="username" id="username">
+			<input type="password" placeholder="Password" name ="password">
+			<button type="submit" id="login-button">Login</button>
+            <br><li id="showerror"></li>
+            <a id="goToRegister" href="register.html" >Register</a>
+		</form>
+        <a href="main.html">我是暫時傳送門</a>
+	</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel = "stylesheet" href = "css/style.css"> 
+    <script src="http://code.jquery.com/jquery-2.0.3.js"></script>
+    <script>
+        var username = window.location.search.substring(1);
+        function welcome(){
+            alert('welcome! ' + username);
+        }
+        
+        function gotomailbox()
+        {
+            window.location.href="mailbox.html?"+username;
+        }
+    $(document).ready(function(){
+        var $form = $('form');
+        $form.submit(function(){
+        $.post($(this).attr('action'), $(this).serialize(), function(response){
+            if(response == true){
+                alert('Messege have been saved!');
+                window.location.href="main.html?"+username;
+            }else{
+                document.getElementById('showerror').innerHTML="please enter his/her mobile or say something!";
+            }
+        },'json');
+        return false;
+        });
+            });
+    </script>
+</head>
+<body onload="welcome()">
+    <header id="header">
+				<h1 id="barcaption">聽說</h1>
+				<nav id="nav">
+					<ul>
+						<li><a>想說什麼</a></li>
+						<li><a onclick="gotomailbox()">郵箱</a></li>
+					</ul>
+				</nav>
+    </header>
+   <div class="wrapper" id="gaobaiform">
+	<div class="container">
+		<form class="form" method="post" action="http://140.115.204.78/FinalProject/insertmessege.php">
+			<input type="text" placeholder="His/Her Cellphone Number" name ="mobile">
+            <textarea name="messege" id="gaobai"></textarea>
+			<button type="submit" id="register-button">Submit</button>
+            <br><li id="showerror"></li>
+		</form>
+	</div>
+</div>
+    
+
+
+</body>
+</html>

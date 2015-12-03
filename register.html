@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel = "stylesheet" href = "css/style.css">
+    <script src="http://code.jquery.com/jquery-2.0.3.js"></script>
+    <script>
+        $(document).ready(function(){
+        var $form = $('form');
+        $form.submit(function(){
+        $.post($(this).attr('action'), $(this).serialize(), function(response){
+        },'json');
+        return false;
+        });
+            });
+    </script>
+</head>
+<body>
+    <div id="caption">
+    <h1 >註冊 聽說</h1>
+    </div>
+<div class="wrapper">
+	<div class="container">
+		<form class="form" method="post" action="http://140.115.204.78/FinalProject/register.php">
+			<input type="text" placeholder="Username for login" name ="username">
+			<input type="password" placeholder="Password" name ="password">
+            <input type="password" placeholder="Type your password again">
+            <input type="number" placeholder="Mobile number for match" name ="mobile">
+			<button type="submit" id="register-button" onClick="location.href='index.html'">Register</button>
+            <br><br>
+            <a id="goTologin" href="index.html">Login</a>
+		</form>
+	</div>
+</div>
+
+</body>
+</html>
